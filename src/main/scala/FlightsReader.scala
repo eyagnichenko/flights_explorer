@@ -65,7 +65,7 @@ class FlightsReader() {
   }
 
   /**
-    * Calculates week of year from the date string.
+    * Calculates week of year from the date string, assuming that week starts on Monday.
     * @param dateStr: date string.
     * @return [[Int]] containing week of year value.
     */
