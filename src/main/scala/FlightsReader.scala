@@ -22,6 +22,8 @@ class FlightsReader() {
   val Origin = 6
   val Dest = 7
 
+  val toRemove: Set[Char] = "\"".toSet
+
   val gzipped: String = "src/main/resources/planes_log.csv.gz"
   /**
     * Read flights from gzipped file.
@@ -40,7 +42,7 @@ class FlightsReader() {
     } yield Flight(values(Year).toInt, values(Quarter).toInt, values(Month).toInt, values(DayOfMonth),
       values(DayOfTheWeek),
       getWeekOfYear(values(FlightDate)),  // calculate weekOfYear value for task #3
-      values(FlightDate), values(Origin).replace("\"", ""), values(Dest).replace("\"", ""))
+      values(FlightDate), values(Origin).filterNot(toRemove), values(Dest).filterNot(toRemove))
 
   }
 
@@ -58,7 +60,7 @@ class FlightsReader() {
     } yield Flight(values(Year).toInt, values(Quarter).toInt, values(Month).toInt, values(DayOfMonth),
       values(DayOfTheWeek),
       getWeekOfYear(values(FlightDate)),  // calculate weekOfYear value for task #3
-      values(FlightDate), values(Origin).replace("\"", ""), values(Dest).replace("\"", ""))
+      values(FlightDate), values(Origin).filterNot(toRemove), values(Dest).filterNot(toRemove))
 
   }
 
