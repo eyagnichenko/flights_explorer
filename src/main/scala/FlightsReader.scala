@@ -1,7 +1,7 @@
 import java.io.{BufferedInputStream, FileInputStream}
-import java.time.LocalDate
+import java.time.{LocalDate, DayOfWeek}
+import java.time.format.DateTimeFormatter
 import java.time.temporal.{TemporalField, WeekFields}
-import java.util.Locale
 import java.util.zip.GZIPInputStream
 
 import scala.io.Source
@@ -17,7 +17,7 @@ class FlightsReader() {
   val Quarter = 1
   val Month = 2
   val DayOfMonth = 3
-  val DayOfWeek = 4
+  val DayOfTheWeek = 4
   val FlightDate = 5
   val Origin = 6
   val Dest = 7
@@ -38,7 +38,7 @@ class FlightsReader() {
         .toVector
       values = line.split(",").map(_.trim)
     } yield Flight(values(Year).toInt, values(Quarter).toInt, values(Month).toInt, values(DayOfMonth),
-      values(DayOfWeek),
+      values(DayOfTheWeek),
       getWeekOfYear(values(FlightDate)),  // calculate weekOfYear value for task #3
       values(FlightDate), values(Origin).replace("\"", ""), values(Dest).replace("\"", ""))
 
@@ -56,7 +56,7 @@ class FlightsReader() {
       line <- Source.fromResource(file).getLines.drop(1).toVector
       values = line.split(",").map(_.trim)
     } yield Flight(values(Year).toInt, values(Quarter).toInt, values(Month).toInt, values(DayOfMonth),
-      values(DayOfWeek),
+      values(DayOfTheWeek),
       getWeekOfYear(values(FlightDate)),  // calculate weekOfYear value for task #3
       values(FlightDate), values(Origin).replace("\"", ""), values(Dest).replace("\"", ""))
 
@@ -69,8 +69,9 @@ class FlightsReader() {
     */
   def getWeekOfYear(dateStr: String): Int = {
 
-    val date: LocalDate = LocalDate.parse(dateStr)
-    val weekOfYear: TemporalField = WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear()
+    val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    val date: LocalDate = LocalDate.parse(dateStr, formatter)
+    val weekOfYear: TemporalField = WeekFields.of(DayOfWeek.MONDAY, 1).weekOfWeekBasedYear()
     date.get(weekOfYear)
 
   }
