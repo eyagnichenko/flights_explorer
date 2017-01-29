@@ -16,7 +16,7 @@ class FilesComparator {
     *        - true: if files are equal
     *        - false: if files are not equal
     */
-  def areEqual(actualFilePath: String, expectedFilePath: String): Boolean = {
+  def checkIfFilesAreEqual(actualFilePath: String, expectedFilePath: String): Boolean = {
 
     val actualFileLength = fromFile(actualFilePath).getLines.size
     val expectedFileLength = fromFile(expectedFilePath).getLines.size

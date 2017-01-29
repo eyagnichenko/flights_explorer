@@ -24,7 +24,7 @@ class OutputWriterSpec extends Specification {def is = s2"""
     val fileName = "whole_period.txt"
     val arrivalsMap = Map("ABE" -> 137, "DAL" -> 3861, "MGM" -> 295, "PHX" -> 13335, "YUM" -> 264)
     outputWriter.writeToFile(arrivalsMap, actualResultsPath + fileName)
-    comparator.areEqual(actualResultsPath + fileName, expectedResultsPath + fileName)
+    comparator.checkIfFilesAreEqual(actualResultsPath + fileName, expectedResultsPath + fileName)
 
   } must_==true
 
@@ -33,7 +33,7 @@ class OutputWriterSpec extends Specification {def is = s2"""
     val fileName = "for_week.txt"
     val startsMap = Map("ABE" -> 10, "DAL" -> 562, "MGM" -> 41, "PHX" -> 2340, "YUM" -> 52)
     outputWriter.writeWeekDataToFile(1, startsMap, actualResultsPath + fileName)
-    comparator.areEqual(actualResultsPath + fileName, expectedResultsPath + fileName)
+    comparator.checkIfFilesAreEqual(actualResultsPath + fileName, expectedResultsPath + fileName)
 
   } must_==true
 //
@@ -43,7 +43,7 @@ class OutputWriterSpec extends Specification {def is = s2"""
     val weeklyMap = Map(1 -> Map("ABE" -> 10, "DAL" -> 562, "MGM" -> 41, "PHX" -> 2340, "YUM" -> 52),
       2 -> Map("ABE" -> 32, "DAL" -> 872, "MGM" -> 68, "PHX" -> 2966, "YUM" -> 58))
     outputWriter.writeToFileWeekly(weeklyMap, actualResultsPath + fileName)
-    comparator.areEqual(actualResultsPath + fileName, expectedResultsPath + fileName)
+    comparator.checkIfFilesAreEqual(actualResultsPath + fileName, expectedResultsPath + fileName)
 
   } must_==true
 
