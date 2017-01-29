@@ -1,0 +1,6 @@
+W1:
+	ABE 10
+	DAL 562
+	MGM 41
+	PHX 2340
+	YUM 52
