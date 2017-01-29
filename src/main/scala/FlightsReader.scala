@@ -10,7 +10,7 @@ import scala.io.Source
 /**
   * Implementation of FlightsReader responsible for reading flights from file.
   */
-class FlightsReader() {
+class FlightsReader {
 
   // CSV file mapping
   val Year = 0

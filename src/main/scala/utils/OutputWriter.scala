@@ -6,7 +6,7 @@ import java.io.{File, FileOutputStream, PrintWriter}
 /**
   * Implementation of OutputWriter responsible for saving results to files.
   */
-class OutputWriter() {
+class OutputWriter {
 
   // values indexes
   val airport = 0
@@ -76,7 +76,7 @@ class OutputWriter() {
     var week: Int = 1
     var append: Boolean = false  // create / re-write file to save data for the 1st week
 
-    while (week < map.size) {  // map.size is equal to amount of weeks in map
+    while (week <= map.size) {  // map.size is equal to amount of weeks in map
 
       val weekArrivals: Option[Map[String, Int]] = map.get(week)  // get arrivals for week
       writeWeekDataToFile(week, weekArrivals.get, out, append)
