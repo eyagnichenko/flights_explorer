@@ -9,7 +9,7 @@ class FlightsExplorerSpec extends Specification {def is = s2"""
     amount of starts should be calculated properly                              $startsMap
     amount of diffs in arrivals and starts should be calculated properly        $diffsMap
     amount of arrivals for week should be calculated properly                   $arrivalsForWeek
-    and stored separately for each week                                         $arrivalsWeeklyMap
+    and saved separately for each week                                          $arrivalsWeeklyMap
 """
 
   val flightsExplorer = FlightsExplorer

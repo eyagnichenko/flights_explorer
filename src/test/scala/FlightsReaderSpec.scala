@@ -4,9 +4,9 @@ import org.specs2.matcher.MatchResult
 
 class FlightsReaderSpec extends Specification {def is = s2"""
   Week of year should be calculated properly for:
-    the first day of week                     $weekForFirstDayOfWeek
-    the day in the middle of week             $weekForDayInTheMiddleOfWeek
-    the last day of week                      $weekForLastDayOfWeek
+    the first day of week                                     $weekForFirstDayOfWeek
+    the day in the middle of week                             $weekForDayInTheMiddleOfWeek
+    the last day of week                                      $weekForLastDayOfWeek
 """
 
   val flightsReader: FlightsReader = new FlightsReader
