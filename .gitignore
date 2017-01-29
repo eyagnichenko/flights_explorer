@@ -1,4 +1,5 @@
 .idea/
 output/
 project/
+src/test/resources/actual/
 target/
