@@ -37,7 +37,7 @@ class OutputWriter {
   }
 
   /**
-    * Creates / re-writes file, containing data about arrivals to airports per week sorted by airports.
+    * Creates / re-writes file, containing data about arrivals to airports for separate week sorted by airports.
     * @param week: [[Int]] containing number of week.
     * @param map: contains parsed flights data for week.
     * @param out: file path.
