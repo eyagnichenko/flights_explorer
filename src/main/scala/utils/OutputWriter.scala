@@ -14,8 +14,8 @@ class OutputWriter {
 
   /**
     * Creates / re-writes file, containing data sorted by airports.
-    * @param map: contains parsed flights data.
-    * @param out: file path.
+    * @param map: [[Map]] containing parsed flights data.
+    * @param out: [[String]] containing file path.
     */
   def writeToFile(map: Map[String, Int], out: String): Unit = {
 
@@ -39,8 +39,8 @@ class OutputWriter {
   /**
     * Creates / re-writes file, containing data about arrivals to airports for separate week sorted by airports.
     * @param week: [[Int]] containing number of week.
-    * @param map: contains parsed flights data for week.
-    * @param out: file path.
+    * @param map: [[Map]] containing parsed flights data.
+    * @param out: [[String]] containing file path.
     * @param append: [[Boolean]] trigger:
     *                - false: re-write file
     *                - true: add data to file
@@ -68,8 +68,8 @@ class OutputWriter {
   /**
     * Creates / rewrites file, containing data about arrivals to airports sorted by weeks by invoking
     * writeWeekDataToFile method.
-    * @param map contains parsed flights data.
-    * @param out file path.
+    * @param map: [[Map]] containing parsed flights data.
+    * @param out: [[String]] containing file path.
     */
   def writeToFileWeekly(map: Map[Int, Map[String, Int]], out: String): Unit = {
 
