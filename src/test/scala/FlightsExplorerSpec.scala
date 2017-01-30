@@ -13,7 +13,8 @@ class FlightsExplorerSpec extends Specification {def is = s2"""
 """
 
   val flightsExplorer = FlightsExplorer
-  val flights: Seq[Flight] = flightsExplorer.getFlights
+  val sourceFile: String = "src/test/resources/planes_log.csv.gz"
+  val flights: Seq[Flight] = flightsExplorer.getFlights(sourceFile)
 
   def flightsAmount: MatchResult[Any] = {
     flights.size

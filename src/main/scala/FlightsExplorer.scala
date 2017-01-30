@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException
+import java.nio.charset.MalformedInputException
 import java.time.format.DateTimeParseException
 
 import utils.OutputWriter
@@ -10,10 +11,10 @@ import utils.OutputWriter
   */
 object FlightsExplorer extends App {
 
-  val writer = new OutputWriter()
+  val writer: OutputWriter = new OutputWriter
 
   println("Read flights...\n")
-  val flights = getFlights
+  val flights: Seq[Flight] = getFlights()
 
   println("Get arrivals to airports...")
   val arrivalsMap: Map[String, Int] = getAmountOfArrivalsToAirports(flights)  // task #1
@@ -34,18 +35,16 @@ object FlightsExplorer extends App {
 
   /**
     * Takes flights from file using [[FlightsReader]].
-    * Handles 'file not found' exceptions and errors in source file.
-    * @return sequence containing flights.
+    * Handles 'file not found', 'malformed input' exceptions and errors in source file.
+    * @return [[Seq]] of [[Flight]].
    */
-  def getFlights: Seq [Flight] = {
+  def getFlights(sourceFile: String = "src/main/resources/planes_log.csv.gz"): Seq [Flight] = {
 
     var flights = Seq[Flight]()
-
-    //    try flights = new FlightsReader().readFlights()
-    try flights = new FlightsReader().readFlightsFromGzip()
+    try flights = new FlightsReader().readFlightsFromGzip(sourceFile)
     catch {
-      case _: FileNotFoundException => System.err.println("File not found.")  // for readFlightsFromGzip method
-//      case _: NullPointerException => System.err.println("File not found.")  // for readFlights
+      case _: FileNotFoundException => System.err.println("File not found.")
+      case _: MalformedInputException => System.err.println("Wrong file format.")
       case _: NumberFormatException => System.err.println("Couldn't init flights from source file.")
       case _: DateTimeParseException => System.err.println("Couldn't init flights from source file.")
     }
@@ -93,8 +92,7 @@ object FlightsExplorer extends App {
     resMap = startsMap ++ arrivalsMap.map{
       case (k, v) => k -> (v - startsMap.getOrElse(k,0))  // get differences between arrivals and starts from airports
     }
-    resMap = resMap.filter((t) => t._2 != 0) // remove zero values
-    resMap
+    resMap.filter((t) => t._2 != 0) // remove zero values
 
   }
 

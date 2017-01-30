@@ -22,15 +22,15 @@ class FlightsReader {
   val Origin = 6
   val Dest = 7
 
-  val toRemove: Set[Char] = "\"".toSet
-
-  val gzipped: String = "src/main/resources/planes_log.csv.gz"
   /**
-    * Read flights from gzipped file.
-    * @param file: path to gzipped file with source data.
-    * @return [[Seq]] containing flights.
+    * Reads flights from gzipped file.
+    * Invokes calculation of weekOfYear value due to FlightDate.
+    * @param file: [[String]] containing path to gzipped file with source data.
+    * @return [[Seq]] of [[Flight]].
     */
-  def readFlightsFromGzip(file: String = gzipped): Seq[Flight] = {
+  def readFlightsFromGzip(file: String): Seq[Flight] = {
+
+    val toRemove: Set[Char] = "\"".toSet
 
     for {
       line <- Source.fromInputStream(
@@ -46,28 +46,10 @@ class FlightsReader {
 
   }
 
-  val src: String = "planes_log.csv"  // please, gunzip file in 'src/main/resources'
-  /**
-    * Read flights from gunzipped CSV file.
-    * @param file: CSV file with source data.
-    * @return [[Seq]] containing flights.
-    */
-  def readFlights(file: String = src): Seq[Flight] = {
-
-    for {
-      line <- Source.fromResource(file).getLines.drop(1).toVector
-      values = line.split(",").map(_.trim)
-    } yield Flight(values(Year).toInt, values(Quarter).toInt, values(Month).toInt, values(DayOfMonth),
-      values(DayOfTheWeek),
-      getWeekOfYear(values(FlightDate)),  // calculate weekOfYear value for task #3
-      values(FlightDate), values(Origin).filterNot(toRemove), values(Dest).filterNot(toRemove))
-
-  }
-
   /**
     * Calculates week of year from the date string, assuming that week starts on Monday.
     * @param dateStr: date string.
-    * @return [[Int]] containing week of year value.
+    * @return [[Int]] containing 'week of year' value.
     */
   def getWeekOfYear(dateStr: String): Int = {
 
