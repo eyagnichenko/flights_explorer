@@ -35,7 +35,7 @@ object FlightsExplorer extends App {
 
   /**
     * Takes flights from file using [[FlightsReader]].
-    * Handles 'file not found', 'malformed input' exceptions and errors in source file.
+    * Handles 'out of memory' error, 'file not found', 'malformed input' exceptions and errors in source file.
     * @return [[Seq]] of [[Flight]].
    */
   def getFlights(sourceFile: String = "src/main/resources/planes_log.csv.gz"): Seq [Flight] = {
@@ -45,8 +45,10 @@ object FlightsExplorer extends App {
     catch {
       case _: FileNotFoundException => System.err.println("File not found.")
       case _: MalformedInputException => System.err.println("Wrong file format.")
-      case _: NumberFormatException => System.err.println("Couldn't init flights from source file.")
-      case _: DateTimeParseException => System.err.println("Couldn't init flights from source file.")
+      case _: OutOfMemoryError => System.err.println("Not enough memory. Try to run sbt with '-mem' parameter.\n" +
+        "Approximately 512MB are needed to process data for a month and 5GB are needed to process data for a year.")
+      case _: NumberFormatException => System.err.println("Failed to init flights from source file.")
+      case _: DateTimeParseException => System.err.println("Failed to init flights from source file.")
     }
     if (flights.isEmpty) System.exit(1) // exit if failed to init flights
     flights
