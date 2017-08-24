@@ -17,19 +17,20 @@ object FlightsExplorer extends App {
   val flights: Seq[Flight] = getFlights()
 
   println("Get arrivals to airports...")
-  val arrivalsMap: Map[String, Int] = getAmountOfArrivalsToAirports(flights)  // task #1
-  writer.writeToFile(arrivalsMap,  "output/task1_arrivals.txt")
+  val arrivalsMap: Map[String, Int] = getAmountOfArrivalsToAirports(flights)
+  writer.writeToFile(arrivalsMap,  "output/arrivals.txt")
 
   println("Get starts from airports...")
   val startsMap: Map[String, Int] = getAmountOfStartsFromAirports(flights)
+  writer.writeToFile(startsMap,  "output/starts.txt")
 
   println("Get difference in arrivals and starts from airports...")
-  val diffsMap: Map[String, Int] = getDiffsBetweenArrivalsAndStarts(arrivalsMap, startsMap)  // task #2
-  writer.writeToFile(diffsMap, "output/task2_diffs.txt")
+  val diffsMap: Map[String, Int] = getDiffsBetweenArrivalsAndStarts(arrivalsMap, startsMap)
+  writer.writeToFile(diffsMap, "output/diffs.txt")
 
   println("Get arrivals to airports weekly...")
-  val arrivalsWeeklyMap: Map[Int, Map[String, Int]] = getAmountOfArrivalsToAirportsWeekly(flights)  // task #3
-  writer.writeToFileWeekly(arrivalsWeeklyMap, "output/task3_arrivals_weekly.txt")
+  val arrivalsWeeklyMap: Map[Int, Map[String, Int]] = getAmountOfArrivalsToAirportsWeekly(flights)
+  writer.writeToFileWeekly(arrivalsWeeklyMap, "output/arrivals_weekly.txt")
 
   println("Done.")
 
@@ -55,7 +56,7 @@ object FlightsExplorer extends App {
 
   }
 
-  /** Task #1.
+  /**
     * Calculates amount of arrivals to each airport.
     * @param flights: [[Seq]] containing flights data.
     * @return map containing airports with amount of arrivals to them.
@@ -82,7 +83,7 @@ object FlightsExplorer extends App {
 
   }
 
-  /** Task #2.
+  /**
     * Calculates the difference in arrivals and starts from each airport.
     * @param arrivalsMap: map of airports with amount of arrivals to them.
     * @param startsMap: map of airports with amount of starts from them.
@@ -113,7 +114,7 @@ object FlightsExplorer extends App {
 
   }
 
-  /** Task #3.
+  /**
     * Calculates amount of arrivals to airports weekly.
     * @param flights: [[Seq]] containing flights data.
     * @return map containing airports with amount of arrivals to them weekly.

@@ -41,7 +41,7 @@ class FlightsReader {
       values = line.split(",").map(_.trim)
     } yield Flight(values(Year).toInt, values(Quarter).toInt, values(Month).toInt, values(DayOfMonth),
       values(DayOfTheWeek),
-      getWeekOfYear(values(FlightDate)),  // calculate weekOfYear value for task #3
+      getWeekOfYear(values(FlightDate)),  // calculate weekOfYear value
       values(FlightDate), values(Origin).filterNot(toRemove), values(Dest).filterNot(toRemove))
 
   }
