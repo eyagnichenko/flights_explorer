@@ -14,4 +14,4 @@ Running
 
 Notes
 -----
-* tested on macOS Sierra, Ubuntu 16.04, Windows 7 and 10 with Scala 2.12.1
+* tested on macOS Sierra, Ubuntu 16.04, Windows 7 and 10 with Scala 2.12.3
